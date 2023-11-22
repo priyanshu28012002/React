@@ -1,0 +1,213 @@
+!web react go with react dom
+mobile app react go with react native
+
+"@testing-library/jest-dom": "^5.17.0", //web per kam ke leya
+"web-vitals": "^2.1.4" // app ke performance tracking for performance
+"eslintConfig": { error bhi nahi hai per aur improve keya ja sakta hai
+"start": "react-scripts start", // development
+"build": "react-scripts build", // production
+"test": "react-scripts test", // test
+"eject": "react-scripts eject" // MOVE out of the react for introduce new frameworks
+
+npm run start
+npm run build in production
+
+
+
+
+vite
+
+npm create vite@latest
+project name
+frameworks name
+variant name
+
+
+npm install
+npm run dev
+
+
+
+js load in html files by "react-scripts": "5.0.1", for package.json
+vit can directly load scripts js files
+index.html
+index.js
+app.js
+
+
+How React works to update the DOM efficiently.
+
+index.js: Typically, in a React application, index.js serves
+as the entry point where React is initially configured and
+the main application component is rendered into the DOM.
+
+ReactDOM.createRoot(): In modern versions of React (React 18 and beyond),
+you can use ReactDOM.createRoot() to create a root for rendering.
+This method is part of the experimental Concurrent Mode API that aims to
+improve the performance and user experience of React applications by allowing
+React to work on multiple tasks concurrently.
+
+Virtual DOM: React uses a Virtual DOM (VDOM) to represent the UI components in memory.
+When you make changes to the state or props of a component, React first updates the VDOM,
+rather than directly manipulating the real DOM. This allows React to efficiently compare
+the current VDOM with the previous VDOM and determine
+what changes need to be made to the real DOM.
+
+Comparing and Replacing DOM: React's reconciliation algorithm compares the current
+VDOM with the previous VDOM and calculates the minimal set of changes needed to update
+the real DOM.
+This process is known as "reconciliation." React identifies the differences (changes) and
+updates only those parts of the real DOM that have changed, minimizing the number
+of actual DOM manipulations.
+
+Rendering: Once React has determined the necessary changes, it updates the real DOM efficiently.
+React can batch multiple updates together for performance optimization, and it ensures that the
+updates are applied in the correct order to maintain the integrity of the UI.
+
+
+<React.StrictMode> is a wrapper component provided by React that helps developers write more reliable and maintainable
+    React applications by highlighting potential problems and deprecated features during development.
+    It does not affect the production build of your application, but it offers valuable warnings and checks during the
+    development phase.
+    1. Identifying and Highlighting Problems
+    2. Preventing Side Effects:
+    3. Detecting Legacy APIs:
+</React.StrictMode>
+
+In React, it's a common convention to use capitalized names for component functions and to name
+the corresponding files with the same capitalization.
+This practice makes it easier to distinguish React components from regular JavaScript functions and files.
+.jsx if file return html or it is component
+function Header() {
+// Component logic here
+}
+Header.jsx
+// Importing the Header component from Header.jsx
+import Header from './Header';
+
+///////////////////////////////////////////////////////
+****************************************************************
+
+function customRender(reactElement, mainContaniner) {
+    // const domElement = document.createElement(reactElement.type)
+    // domElement.innerHTML = reactElement.children
+    // domElement.setAttribute('href',reactElement.props.href)
+    // domElement.setAttribute('target',reactElement.props.target)
+    // mainContaniner.appendChild(domElement)
+    const domElement = document.createElement(reactElement.type)
+    domElement.innerHTML = reactElement.children
+    for (const prop in reactElement.props) {
+        if (prop === "children") {
+            continue;
+        }
+        domElement.setAttribute(prop, reactElement.props[prop])
+        
+    }
+    mainContaniner.appendChild(domElement)
+
+}
+
+const reactElement = {
+    type: 'a',
+    props: {
+        href: 'https://google.com',
+        target: '_blank',
+    },
+    children: 'Click me to visit google'
+}
+
+
+
+const mainContaniner = document.querySelector('#root');
+
+customRender(reactElement, mainContaniner)
+
+
+<React.StrictMode>
+   // <App />
+   it accept the html tage returned by App , pass therough variable const anotherElement =(  
+<a href ="https://google.com" target = "_blank">Visit the google website anotherElement</a>
+)  or an object created by React.createElement we can write the our function to create the object 
+ function htmlToReact(htmlString) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  const element = doc.body.firstChild;
+
+  if (element) {
+    const { tagName, attributes, textContent } = element;
+    const props = {};
+
+    for (let i = 0; i < attributes.length; i++) {
+      const { name, value } = attributes[i];
+      props[name] = value;
+    }
+
+    return React.createElement(tagName, props, textContent);
+  }
+
+  return null;
+}
+
+// Usage
+const htmlString = '<a href="https://google.com" target="_blank">Click me to visit google 123 </a>';
+const reactElement = htmlToReact(htmlString);
+ </React.StrictMode>,
+
+
+
+username 
+{username}  //evaluated expression 
+const username = "Yashu 123"
+
+const ReactElement = React.createElement(
+   'a',
+   {
+      href: 'https://google.com',
+      target: '_blank',
+  },
+  'Click me to visit !@# google ReactElement',
+  username // jab sara tre ban jata hai to username store hota hai 
+  // object me condition nahi hoti hai
+
+)
+
+
+// return fregement 
+        // closing tag in .jsx
+
+virtual original dom
+state
+prompt
+
+
+
+tailwent 
+
+
+tailwent config 
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+index.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+con Click ko function chaheya ka ke return value 
+
+npm run dev
