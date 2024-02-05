@@ -61,6 +61,7 @@ Web Development Tools and Concepts:
 Webpack and Bundling:
 
 Webpack vite : A module bundler that takes your JavaScript, CSS, and other files, and bundles them together for the browser.
+
 Bundling: The process of combining multiple files into a single file (or a few files) to reduce the number of HTTP requests.
 npm (Node Package Manager) and npx:
 
@@ -230,3 +231,139 @@ That's it! You've successfully created a new React app using Create React App. N
   - Vite has an active community, and you can find additional tools and plugins to enhance your development experience.
 
 That's it! You've successfully created a new Vite project. Vite's speed and features make it a compelling choice for modern web development.
+
+
+02 
+
+
+03 
+
+#React Router 
+is a standard library for routing in React applications. It enables navigation among views in your React application, allowing you to build a single-page web application with navigation.
+
+Here's a basic guide on how to use React Router:
+
+1. **Installation:**
+
+   Make sure you have React and React Router installed in your project.
+
+   ```bash
+   npm install react-router-dom
+   ```
+
+2. **Set up Routes:**
+
+   In your main component (often `App.js`), import `BrowserRouter` and `Route` from `react-router-dom`. Use the `BrowserRouter` component to wrap your entire application, and then define `Route` components for each view.
+
+   ```jsx
+   // App.js
+
+   import React from 'react';
+   import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+   import Home from './components/Home';
+   import About from './components/About';
+
+   function App() {
+     return (
+       <Router>
+         <Route path="/" exact component={Home} />
+         <Route path="/about" component={About} />
+       </Router>
+     );
+   }
+
+   export default App;
+   ```
+
+3. **Link to Routes:**
+
+   Use the `Link` component from `react-router-dom` to create links between different views.
+
+   ```jsx
+   // Home.js
+
+   import React from 'react';
+   import { Link } from 'react-router-dom';
+
+   const Home = () => {
+     return (
+       <div>
+         <h2>Home</h2>
+         <Link to="/about">Go to About</Link>
+       </div>
+     );
+   };
+
+   export default Home;
+   ```
+
+4. **Accessing Route Parameters:**
+
+   You can use the `useParams` hook to access parameters from the URL.
+
+   ```jsx
+   // BlogPost.js
+
+   import React from 'react';
+   import { useParams } from 'react-router-dom';
+
+   const BlogPost = () => {
+     const { postId } = useParams();
+
+     return (
+       <div>
+         <h2>Blog Post {postId}</h2>
+       </div>
+     );
+   };
+
+   export default BlogPost;
+   ```
+
+   And in your route definition:
+
+   ```jsx
+   // App.js
+
+   // ...
+
+   <Route path="/blog/:postId" component={BlogPost} />
+   ```
+
+   Now, when you navigate to `/blog/123`, `postId` will be "123" in the `BlogPost` component.
+
+5. **Redirects:**
+
+   You can use the `Redirect` component to navigate to another route programmatically.
+
+   ```jsx
+   // Login.js
+
+   import React, { useState } from 'react';
+   import { Redirect } from 'react-router-dom';
+
+   const Login = () => {
+     const [loggedIn, setLoggedIn] = useState(false);
+
+     const handleLogin = () => {
+       // Perform login logic
+       setLoggedIn(true);
+     };
+
+     if (loggedIn) {
+       return <Redirect to="/dashboard" />;
+     }
+
+     return (
+       <div>
+         <h2>Login</h2>
+         <button onClick={handleLogin}>Login</button>
+       </div>
+     );
+   };
+
+   export default Login;
+   ```
+
+These are the basics of setting up routing in a React application using React Router. There are more advanced features and options available, such as nested routes, route guards, and route transitions, which you can explore in the React Router documentation: https://reactrouter.com/
